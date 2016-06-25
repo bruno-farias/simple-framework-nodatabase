@@ -1,8 +1,17 @@
 {
+    "name": "bruno-farias/lightspeed",
+    "license": "MIT",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "LightSpeed\\": "src/LightSpeed/"
+        }
+    },
     "require": {
         "phpunit/phpunit": "^5.4",
         "nikic/fast-route": "^1.0",
         "php-di/php-di": "^5.3",
-        "lcobucci/jwt": "^3.1"
+        "lcobucci/jwt": "^3.1",
+        "guzzlehttp/guzzle": "^6.2"
     }
 }
