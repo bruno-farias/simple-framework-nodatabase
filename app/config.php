@@ -7,8 +7,11 @@
  */
 
 use function DI\object;
+use LightSpeed\Repositories\ValidateDataRepository;
+use LightSpeed\Repositories\Contracts\ValidateDataInterface;
 
 return [
     //bind an interface to an implementation
+    
 
 ];

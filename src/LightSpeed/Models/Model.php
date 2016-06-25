@@ -9,6 +9,8 @@
 namespace LightSpeed\Models;
 
 
+use LightSpeed\Repositories\Contracts\ValidateDataInterface;
+
 abstract class Model
 {
 
@@ -19,6 +21,11 @@ abstract class Model
      */
     protected $rootDirectory = 'data';
 
+    /**
+     * Default file extension
+     *
+     * @var string
+     */
     protected $fileExtension = '.json';
 
     /**
@@ -35,23 +42,85 @@ abstract class Model
      */
     protected $dateFormat;
 
+    /**
+     * Property to validate data
+     *
+     * @var ValidateDataInterface
+     */
+    protected $validate;
+
+
+    /**
+     * Model constructor.
+     * @param ValidateDataInterface $validate
+     */
+    public function __construct(ValidateDataInterface $validate)
+    {
+        $this->validate = new $validate();
+    }
+
+    /**
+     * Verifies if a file used to store data exists
+     *
+     * @param $file
+     * @return bool
+     */
     public function checkFile($file)
     {
-        return file_exists($this->rootDirectory . '/' . $file.$this->fileExtension);
+        return file_exists($this->getFilePath($file)) or die('File not exists!');
     }
 
+    /**
+     * Simple return the full file path of a file
+     *
+     * @param $file
+     * @return string
+     */
+    public function getFilePath($file)
+    {
+        return $this->rootDirectory .'/' . $file . $this->fileExtension;
+    }
+
+    /**
+     * Create a new empty file
+     *
+     * @param $file
+     * @return bool
+     */
     public function createFile($file)
     {
-        return fopen($this->rootDirectory .'/'. $file.$this->fileExtension, 'w') or die('Unable to create file ' . $file);
+        return fopen($this->getFilePath($file), 'w') or die('Unable to create file ' . $file);
     }
 
+
+    /**
+     * Delete a file
+     *
+     * @param $file
+     * @return bool
+     */
     public function deleteFile($file)
     {
-        return unlink($this->rootDirectory .'/'. $file.$this->fileExtension);
+        return unlink($this->getFilePath($file));
     }
 
-    public function insert($file, $data)
+    /**
+     * Create a new entries with the data provided
+     *
+     * @param $file
+     * @param $newData
+     * @return bool|int
+     */
+    public function insert($file, $newData)
     {
+        if ($this->checkFile($file) && $this->validate->notEmpty($newData)) {
+
+            $data = json_decode(file_get_contents($this->getFilePath($file)), true);
+
+            $data[] = $newData;
+
+            return file_put_contents($this->getFilePath($file), json_encode($data));
+        }
         return false;
     }
 
