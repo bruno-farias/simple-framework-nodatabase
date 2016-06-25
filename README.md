@@ -6,8 +6,11 @@ Create a shopping cart
 ## Description:
 
 You are free to use any tools you like.
+
 The shopping cart should be a working prototype.
+
 The shopping cart should have at least the following features:
+
 * Add different products into your cart
 * Change the quantity of products
 * Allow shipping and billing address to be entered
