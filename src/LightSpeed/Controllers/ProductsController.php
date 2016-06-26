@@ -9,6 +9,7 @@
 namespace LightSpeed\Controllers;
 
 
+use LightSpeed\Models\Product;
 use LightSpeed\Repositories\Contracts\ProductsInterface;
 
 class ProductsController
@@ -23,9 +24,7 @@ class ProductsController
 
     public function index()
     {
-        //echo '<pre>';
         print_r($this->product->listsAll());
-        //return $this->product->listsAll();
     }
 
     public function store()
@@ -33,14 +32,17 @@ class ProductsController
         return $this->product->store($_POST);
     }
 
-    public function update($id, $request)
+    public function update($id)
     {
-        //todo
+        if (!isset($_POST['_method']) || $_POST['_method'] != 'PUT')
+            die('Method not allowed');
+
+        return print_r(json_decode($this->product->update($id, $_POST)));
     }
 
     public function show($id)
     {
-        //todo
+        return print_r($this->product->show($id));
     }
 
     public function delete($id)

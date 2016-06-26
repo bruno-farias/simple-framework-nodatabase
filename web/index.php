@@ -11,15 +11,25 @@ use FastRoute\RouteCollector;
 $container = require __DIR__ . '/../app/bootstrap.php';
 $injector = new Auryn\Injector;
 
+/**
+ * Routes
+ */
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', ['LightSpeed\Controllers\HomeController', 'index']);
+
+    //Products
     $r->addRoute('GET', '/products', ['LightSpeed\Controllers\ProductsController', 'index']);
     $r->addRoute('POST', '/products', ['LightSpeed\Controllers\ProductsController', 'store']);
+    $r->addRoute('POST', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'update']);
+    $r->addRoute('GET', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'show']);
     $r->addRoute('DELETE', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'delete']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
+/**
+ * Interfaces binding
+ */
 $aliases = [
     'LightSpeed\Repositories\Contracts\ValidateDataInterface'   => 'LightSpeed\Repositories\ValidateDataRepository',
     'LightSpeed\Repositories\Contracts\ProductsInterface'       => 'LightSpeed\Repositories\ProductsRepository',

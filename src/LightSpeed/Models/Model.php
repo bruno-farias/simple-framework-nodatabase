@@ -267,6 +267,35 @@ abstract class Model
         return json_encode($count);
     }
 
+    public function updateField($id, $field, $value)
+    {
+        $query = json_decode($this->all(), true);
+        $res = [];
+        $count = 0;
+
+        foreach ($query as $data) {
+
+            if($data['id'] == $id){
+                $data[$field] = $value;
+                $res[] = $data;
+                $count++;
+                continue;
+            }
+            $res[] = $data;
+
+        }
+        $this->truncate();
+        $this->insert($res);
+        return json_encode($count);
+    }
+
+    /**
+     * Remove a item from file
+     *
+     * @param $field
+     * @param $value
+     * @return string
+     */
     public function deleteItem($field, $value)
     {
         $query = json_decode($this->all(), true);

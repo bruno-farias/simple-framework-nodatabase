@@ -24,12 +24,23 @@ class ProductsRepository implements ProductsInterface
 
     public function update($id, $data)
     {
-        // TODO: Implement update() method.
+        $count = 0;
+
+        foreach ($data as $key => $value) {
+            if ($key != '_method'){
+                $product = new Product();
+                $count = $product->updateField($id, $key, $value);
+                unset($product);
+            }
+        }
+
+        return json_decode($count);
     }
 
     public function show($id)
     {
-        // TODO: Implement show() method.
+        $product = new Product();
+        return $product->where('id', $id);
     }
 
     public function listsAll()

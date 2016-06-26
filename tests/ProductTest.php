@@ -74,5 +74,15 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(0, $this->product->deleteItem('product', 'Red Wine'));
         $this->assertGreaterThan(1, $this->product->deleteItem('price', 10.20));
     }
+
+    public function testUpdate()
+    {
+        $data = json_decode($this->product->where('product', 'Beer'), true);
+
+        //fwrite(STDERR, print_r($data));
+        
+        $this->assertEquals(1, $this->product->update('product', 'Beer', 'Soda'));
+        $this->assertEquals(1, $this->product->updateField($data[0]['id'], 'price', 2.1));
+    }
     
 }
