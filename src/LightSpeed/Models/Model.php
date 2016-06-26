@@ -21,6 +21,11 @@ abstract class Model
      */
     protected $rootDirectory = 'data';
 
+    /**
+     * The base directory
+     *
+     * @var null
+     */
     protected $baseDir = null;
 
     /**
@@ -29,7 +34,6 @@ abstract class Model
      * @var string
      */
     protected $fileExtension = '.json';
-
 
     /**
      * THe file used to store data
@@ -89,8 +93,6 @@ abstract class Model
         $this->baseDir = $baseDir;
     }
 
-
-
     /**
      * Verifies if a file used to store data exists
      *
@@ -99,7 +101,7 @@ abstract class Model
      */
     public function checkFile()
     {
-        return file_exists($this->getFilePath($this->file)) or die('File not exists!');
+        return file_exists($this->getFilePath()) or die('File not exists!');
     }
 
     /**
@@ -123,7 +125,7 @@ abstract class Model
      */
     public function createFile()
     {
-        return fopen($this->getFilePath($this->file), 'w') or die('Unable to create file ' . $this->file);
+        return fopen($this->getFilePath(), 'w') or die('Unable to create file ' . $this->file);
     }
 
 
@@ -134,7 +136,12 @@ abstract class Model
      */
     public function deleteFile()
     {
-        return unlink($this->getFilePath($this->file));
+        return unlink($this->getFilePath());
+    }
+
+    public function truncate()
+    {
+        return file_put_contents($this->getFilePath(), "");
     }
 
     /**
@@ -146,7 +153,7 @@ abstract class Model
      */
     public function insert($newData)
     {
-        if ($this->checkFile($this->file)) {
+        if ($this->checkFile()) {
 
             $data = json_decode(file_get_contents($this->getFilePath()), true);
 
@@ -159,14 +166,69 @@ abstract class Model
         return false;
     }
 
+    /**
+     * Simple generate a simple id
+     *
+     * Inspired on MongoDB
+     *
+     * @return string
+     */
     private function generateId()
     {
         return \Helpers::randString($this->primaryKeyLength);
     }
 
+    /**
+     * Returns all resources available in a file
+     *
+     * @return string
+     */
     public function all()
     {
         return file_get_contents($this->getFilePath());
+    }
+
+    /**
+     * Find one or more resources based on given field and value
+     *
+     * @param $field
+     * @param $value
+     * @return string
+     */
+    public function where($field, $value)
+    {
+        $result = json_decode($this->all());
+        $res = [];
+
+        foreach ($result as $data) {
+            foreach ($data as $key => $info) {
+                if ($field == $key && $value == $info) {
+                    $res[] = $data;
+                }
+            }
+        }
+        return json_encode($res);
+    }
+
+    public function update($field, $value, $newValue)
+    {
+        $query = json_decode($this->all());
+        $query = (array) $query;
+        $res = [];
+        $count = 0;
+
+        foreach ($query as $data) {
+
+            if ($data->$field == $value){
+                $data->$field = $newValue;
+                $count++;
+            }
+            $res[] = (array) $data;
+        }
+
+        $this->truncate();
+        $this->insert($res);
+        return json_encode($count);
     }
 
 

@@ -20,12 +20,12 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     public function testDeleteFile()
     {
-        $this->assertTrue($this->user->deleteFile('test'));
+        $this->assertTrue($this->user->deleteFile());
     }
 
     public function testCreateFile()
     {
-        $this->assertTrue($this->user->createFile('test'));
+        $this->assertTrue($this->user->createFile());
     }
 
     public function testInsert()
@@ -49,6 +49,20 @@ class UserTest extends \PHPUnit\Framework\TestCase
     public function testGetAll()
     {
         $this->assertEquals(2, count(json_decode($this->user->all())));
+    }
+
+    public function testGetByWhere()
+    {
+        $this->assertEquals(1, count(json_decode($this->user->where('name', 'Bruno'))));
+        $this->assertEquals(1, count(json_decode($this->user->where('company', 'LightSpeed'))));
+        $this->assertEquals(2, count(json_decode($this->user->where('age', 30))));
+    }
+    
+    public function testUpdate()
+    {
+        $this->assertEquals(2, $this->user->update('age', 30, 31));
+        $this->assertEquals(1, $this->user->update('name', 'Bruno', 'Bruno Farias'));
+        $this->assertEquals(1, $this->user->update('name', 'Fran', 'Francieli Scherer'));
     }
 
 }

@@ -25,7 +25,7 @@ class HomeController
     public function index()
     {
         $users = new User();
-        print_r($users->all());
+        print_r($users->update('age', 31, 30));
     }
 
 }
