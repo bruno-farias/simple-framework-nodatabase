@@ -112,7 +112,6 @@ abstract class Model
     /**
      * Verifies if a file used to store data exists
      *
-     * @param $file
      * @return bool
      */
     public function checkFile()
@@ -123,7 +122,6 @@ abstract class Model
     /**
      * Simple return the full file path of a file
      *
-     * @param null $base
      * @return string
      */
     public function getFilePath()
@@ -172,7 +170,6 @@ abstract class Model
     /**
      * Create a new entries with the data provided
      *
-     * @param $file
      * @param $newData
      * @return bool|int
      */
