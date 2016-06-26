@@ -37,9 +37,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
                 'company'   => 'LightSpeed'
             ],
             [
-                'name'      => 'Fran',
+                'name'      => 'Admin',
                 'age'       => 30,
-                'company'   => 'Bicho Enxuto Toalhas'
+                'company'   => 'NASA'
             ]
         ];
 
@@ -62,7 +62,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(2, $this->user->update('age', 30, 31));
         $this->assertEquals(1, $this->user->update('name', 'Bruno', 'Bruno Farias'));
-        $this->assertEquals(1, $this->user->update('name', 'Fran', 'Francieli Scherer'));
+        $this->assertEquals(1, $this->user->update('name', 'Admin', 'Administrator'));
     }
 
 }

@@ -9,7 +9,6 @@
 namespace LightSpeed\Controllers;
 
 
-use LightSpeed\Models\User;
 use \LightSpeed\Repositories\Contracts\ValidateDataInterface;
 
 class HomeController
@@ -24,8 +23,7 @@ class HomeController
 
     public function index()
     {
-        $users = new User();
-        print_r($users->update('age', 31, 30));
+        echo 'Hello index';
     }
 
 }
