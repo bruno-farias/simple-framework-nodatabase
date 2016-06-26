@@ -14,4 +14,6 @@ interface ValidateDataInterface
 
     public function notEmpty($data);
 
+    public function hasKeyAndValue(array $data, $key, $value);
+
 }

@@ -43,6 +43,22 @@ abstract class Model
     protected $file;
 
     /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
      * The number of models to return for pagination.
      *
      * @var int
