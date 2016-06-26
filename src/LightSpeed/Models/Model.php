@@ -267,6 +267,14 @@ abstract class Model
         return json_encode($count);
     }
 
+    /**
+     * Update item values using id to find
+     *
+     * @param $id
+     * @param $field
+     * @param $value
+     * @return string
+     */
     public function updateField($id, $field, $value)
     {
         $query = json_decode($this->all(), true);
