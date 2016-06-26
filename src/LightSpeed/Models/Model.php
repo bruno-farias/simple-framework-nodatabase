@@ -175,15 +175,19 @@ abstract class Model
      */
     public function insert($newData)
     {
+        $count = 0;
         if ($this->checkFile()) {
 
             $data = json_decode(file_get_contents($this->getFilePath()), true);
 
             foreach ($newData as $item) {
                 $data[] = array_merge(['id' => $this->generateId()], $item);
+                $count++;
             }
 
-            return file_put_contents($this->getFilePath(), json_encode($data));
+            //Saves the new content and returns the quantity inserted
+            if(file_put_contents($this->getFilePath(), json_encode($data)) > 0)
+                return $count;
         }
         return false;
     }
@@ -251,11 +255,32 @@ abstract class Model
 
         foreach ($query as $data) {
 
-            if ($data->$field == $value){
-                $data->$field = $newValue;
+            if ($data->{$field} == $value){
+                $data->{$field} = $newValue;
                 $count++;
             }
             $res[] = (array) $data;
+        }
+
+        $this->truncate();
+        $this->insert($res);
+        return json_encode($count);
+    }
+
+    public function deleteItem($field, $value)
+    {
+        $query = json_decode($this->all(), true);
+        $res = [];
+        $count = 0;
+
+        foreach ($query as $data) {
+
+            if ($data[$field] == $value){
+                unset($data);
+                $count++;
+                continue;
+            }
+            $res[] = $data;
         }
 
         $this->truncate();

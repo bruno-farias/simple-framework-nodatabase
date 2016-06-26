@@ -40,6 +40,7 @@ class ProductsRepository implements ProductsInterface
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $products = new Product();
+        return $products->deleteItem('id', $id);
     }
 }

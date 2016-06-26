@@ -24,8 +24,8 @@ class ProductsController
     public function index()
     {
         //echo '<pre>';
-        //print_r($this->product->listsAll());
-        return $this->product->listsAll();
+        print_r($this->product->listsAll());
+        //return $this->product->listsAll();
     }
 
     public function store()
@@ -45,7 +45,7 @@ class ProductsController
 
     public function delete($id)
     {
-        //todo
+        return $this->product->delete($id);
     }
 
 

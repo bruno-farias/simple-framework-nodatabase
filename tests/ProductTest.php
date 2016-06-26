@@ -36,7 +36,30 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $faker = Faker\Factory::create();
         $data = [];
 
-        for ($x = 0; $x < 100; $x++) {
+        $items = [
+            [
+                'product'   => 'Red Wine',
+                'price'     => 20.57
+            ],
+            [
+                'product'   => 'Beer',
+                'price'     => 1.70
+            ],
+            [
+                'product'   => 'Champagne',
+                'price'     => 10.20
+            ],
+            [
+                'product'   => 'Nutella',
+                'price'     => 10.20
+            ]
+        ];
+
+        foreach ($items as $item) {
+            $data[] = $item;
+        }
+
+        for ($x = 1; $x < 100; $x++) {
             $item = [
                 'product'   => $faker->catchPhrase,
                 'price'     => $faker->randomFloat(2, 5, 300)
@@ -44,6 +67,12 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             $data[] = $item;
         }
         $this->assertGreaterThan(0, $this->product->insert($data));
+    }
+
+    public function testDeleteWhere()
+    {
+        $this->assertGreaterThan(0, $this->product->deleteItem('product', 'Red Wine'));
+        $this->assertGreaterThan(1, $this->product->deleteItem('price', 10.20));
     }
     
 }
