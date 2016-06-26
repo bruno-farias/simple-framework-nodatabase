@@ -30,5 +30,20 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue($this->product->createFile());
     }
+
+    public function testInsert()
+    {
+        $faker = Faker\Factory::create();
+        $data = [];
+
+        for ($x = 0; $x < 100; $x++) {
+            $item = [
+                'product'   => $faker->catchPhrase,
+                'price'     => $faker->randomFloat(2, 5, 300)
+            ];
+            $data[] = $item;
+        }
+        $this->assertGreaterThan(0, $this->product->insert($data));
+    }
     
 }

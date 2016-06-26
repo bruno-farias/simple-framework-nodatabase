@@ -9,6 +9,7 @@
 namespace LightSpeed\Repositories;
 
 
+use LightSpeed\Models\Product;
 use LightSpeed\Repositories\Contracts\ProductsInterface;
 
 class ProductsRepository implements ProductsInterface
@@ -31,7 +32,8 @@ class ProductsRepository implements ProductsInterface
 
     public function listsAll()
     {
-        // TODO: Implement listsAll() method.
+        $products = new Product();
+        return $products->all();
     }
 
     public function delete($id)

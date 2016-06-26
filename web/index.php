@@ -13,12 +13,14 @@ $injector = new Auryn\Injector;
 
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', ['LightSpeed\Controllers\HomeController', 'index']);
+    $r->addRoute('GET', '/products', ['LightSpeed\Controllers\ProductsController', 'index']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
 $aliases = [
-    'LightSpeed\Repositories\Contracts\ValidateDataInterface' => 'LightSpeed\Repositories\ValidateDataRepository'
+    'LightSpeed\Repositories\Contracts\ValidateDataInterface'   => 'LightSpeed\Repositories\ValidateDataRepository',
+    'LightSpeed\Repositories\Contracts\ProductsInterface'       => 'LightSpeed\Repositories\ProductsRepository',
 ];
 
 switch ($route[0]) {
@@ -38,7 +40,5 @@ switch ($route[0]) {
         }
 
         return $injector->execute([$injector->make($controller), $action], $parameters);
-
-        //$container->call($controller, $parameters);
         break;
 }
