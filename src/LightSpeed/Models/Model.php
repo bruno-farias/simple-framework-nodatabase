@@ -121,6 +121,8 @@ abstract class Model
     /**
      * Create a new empty file
      *
+     * aka as CREATE TABLE
+     *
      * @return bool
      */
     public function createFile()
@@ -132,6 +134,8 @@ abstract class Model
     /**
      * Delete a file
      *
+     * aka DELETE TABLE
+     *
      * @return bool
      */
     public function deleteFile()
@@ -139,6 +143,11 @@ abstract class Model
         return unlink($this->getFilePath());
     }
 
+    /**
+     * Preserve the file, but erases all the data inside
+     *
+     * @return int
+     */
     public function truncate()
     {
         return file_put_contents($this->getFilePath(), "");
@@ -210,6 +219,16 @@ abstract class Model
         return json_encode($res);
     }
 
+    /**
+     * Update the data
+     *
+     * aka as UPDATE table SET ...
+     *
+     * @param $field
+     * @param $value
+     * @param $newValue
+     * @return string
+     */
     public function update($field, $value, $newValue)
     {
         $query = json_decode($this->all());
