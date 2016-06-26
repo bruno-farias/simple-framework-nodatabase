@@ -28,9 +28,9 @@ class ProductsController
         return $this->product->listsAll();
     }
 
-    public function store($request)
+    public function store()
     {
-        //todo
+        return $this->product->store($_POST);
     }
 
     public function update($id, $request)

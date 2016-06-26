@@ -11,13 +11,15 @@ namespace LightSpeed\Repositories;
 
 use LightSpeed\Models\Product;
 use LightSpeed\Repositories\Contracts\ProductsInterface;
+use Respect\Validation\Validator as v;
 
 class ProductsRepository implements ProductsInterface
 {
 
     public function store($data)
     {
-        // TODO: Implement store() method.
+        $rules = v::key('product', v::stringType()->length(5, 50));
+        print_r($rules->validate($data));
     }
 
     public function update($id, $data)

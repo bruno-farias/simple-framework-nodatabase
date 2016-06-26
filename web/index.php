@@ -14,6 +14,7 @@ $injector = new Auryn\Injector;
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', ['LightSpeed\Controllers\HomeController', 'index']);
     $r->addRoute('GET', '/products', ['LightSpeed\Controllers\ProductsController', 'index']);
+    $r->addRoute('POST', '/products', ['LightSpeed\Controllers\ProductsController', 'store']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
