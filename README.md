@@ -18,10 +18,10 @@ The shopping cart should have at least the following features:
 ## Requirements:
 
 - Use of VCS (with a meaningful history)
-- use of OOP
+- Use of OOP
 - Documentation
 - Persistent storage using filestorage (compared to using a DB)
-- Backend should expose a API thar is consumed by the frontend
+- Backend should expose a API that is consumed by the frontend
 
 ## Bonus:
 

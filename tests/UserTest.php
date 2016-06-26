@@ -15,6 +15,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
     protected function setUp()
     {
         $this->user = new User();
+        $this->user->setBaseDir('.');
     }
 
     public function testDeleteFile()
@@ -42,7 +43,12 @@ class UserTest extends \PHPUnit\Framework\TestCase
             ]
         ];
 
-        $this->assertGreaterThan(0, $this->user->insert('test', $data));
+        $this->assertGreaterThan(0, $this->user->insert($data));
+    }
+
+    public function testGetAll()
+    {
+        $this->assertEquals(2, count(json_decode($this->user->all())));
     }
 
 }

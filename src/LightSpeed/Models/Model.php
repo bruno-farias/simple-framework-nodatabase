@@ -21,12 +21,22 @@ abstract class Model
      */
     protected $rootDirectory = 'data';
 
+    protected $baseDir = null;
+
     /**
      * Default file extension
      *
      * @var string
      */
     protected $fileExtension = '.json';
+
+
+    /**
+     * THe file used to store data
+     *
+     * @var
+     */
+    protected $file;
 
     /**
      * The number of models to return for pagination.
@@ -43,6 +53,13 @@ abstract class Model
     protected $primaryKey = 'id';
 
     /**
+     * The primary key length
+     *
+     * @var int
+     */
+    protected $primaryKeyLength = 11;
+
+    /**
      * The storage format of the model's date columns.
      *
      * @var string
@@ -57,48 +74,67 @@ abstract class Model
     protected $validate;
 
     /**
+     * @return null
+     */
+    public function getBaseDir()
+    {
+        return $this->baseDir;
+    }
+
+    /**
+     * @param null $baseDir
+     */
+    public function setBaseDir($baseDir)
+    {
+        $this->baseDir = $baseDir;
+    }
+
+
+
+    /**
      * Verifies if a file used to store data exists
      *
      * @param $file
      * @return bool
      */
-    public function checkFile($file)
+    public function checkFile()
     {
-        return file_exists($this->getFilePath($file)) or die('File not exists!');
+        return file_exists($this->getFilePath($this->file)) or die('File not exists!');
     }
 
     /**
      * Simple return the full file path of a file
      *
-     * @param $file
+     * @param null $base
      * @return string
      */
-    public function getFilePath($file)
+    public function getFilePath()
     {
-        return $this->rootDirectory .'/' . $file . $this->fileExtension;
+        if ($this->baseDir === null)
+            return constant('BASE') . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
+
+        return $this->baseDir.'/' . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
     }
 
     /**
      * Create a new empty file
      *
-     * @param $file
      * @return bool
      */
-    public function createFile($file)
+    public function createFile()
     {
-        return fopen($this->getFilePath($file), 'w') or die('Unable to create file ' . $file);
+        return fopen($this->getFilePath($this->file), 'w') or die('Unable to create file ' . $this->file);
     }
 
 
     /**
      * Delete a file
      *
-     * @param $file
      * @return bool
      */
-    public function deleteFile($file)
+    public function deleteFile()
     {
-        return unlink($this->getFilePath($file));
+        return unlink($this->getFilePath($this->file));
     }
 
     /**
@@ -108,17 +144,29 @@ abstract class Model
      * @param $newData
      * @return bool|int
      */
-    public function insert($file, $newData)
+    public function insert($newData)
     {
-        if ($this->checkFile($file)) {
+        if ($this->checkFile($this->file)) {
 
-            $data = json_decode(file_get_contents($this->getFilePath($file)), true);
+            $data = json_decode(file_get_contents($this->getFilePath()), true);
 
-            $data[] = $newData;
+            foreach ($newData as $item) {
+                $data[] = array_merge(['id' => $this->generateId()], $item);
+            }
 
-            return file_put_contents($this->getFilePath($file), json_encode($data));
+            return file_put_contents($this->getFilePath(), json_encode($data));
         }
         return false;
+    }
+
+    private function generateId()
+    {
+        return \Helpers::randString($this->primaryKeyLength);
+    }
+
+    public function all()
+    {
+        return file_get_contents($this->getFilePath());
     }
 
 

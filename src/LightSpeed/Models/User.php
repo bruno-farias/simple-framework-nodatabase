@@ -11,5 +11,5 @@ namespace LightSpeed\Models;
 
 class User extends Model
 {
-
+    protected $file = 'test';
 }

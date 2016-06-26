@@ -9,6 +9,7 @@
 namespace LightSpeed\Controllers;
 
 
+use LightSpeed\Models\User;
 use \LightSpeed\Repositories\Contracts\ValidateDataInterface;
 
 class HomeController
@@ -23,7 +24,8 @@ class HomeController
 
     public function index()
     {
-        echo 'Hello index';
+        $users = new User();
+        print_r($users->all());
     }
 
 }

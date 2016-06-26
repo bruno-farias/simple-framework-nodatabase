@@ -5,7 +5,10 @@
     "autoload": {
         "psr-4": {
             "LightSpeed\\": "src/LightSpeed/"
-        }
+        },
+        "files": [
+            "app/Helpers.php"
+        ]
     },
     "require": {
         "phpunit/phpunit": "^5.4",

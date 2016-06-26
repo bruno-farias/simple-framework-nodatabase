@@ -6,7 +6,6 @@
  * Time: 21:11
  */
 
-
-
 require __DIR__ . '/../vendor/autoload.php';
 
+define('BASE', __DIR__.'/../');
