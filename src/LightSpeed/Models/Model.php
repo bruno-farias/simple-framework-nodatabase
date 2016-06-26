@@ -36,6 +36,13 @@ abstract class Model
     protected $perPage = 15;
 
     /**
+     * The primary key for the model
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
      * The storage format of the model's date columns.
      *
      * @var string
@@ -48,16 +55,6 @@ abstract class Model
      * @var ValidateDataInterface
      */
     protected $validate;
-
-
-    /**
-     * Model constructor.
-     * @param ValidateDataInterface $validate
-     */
-    public function __construct(ValidateDataInterface $validate)
-    {
-        $this->validate = new $validate();
-    }
 
     /**
      * Verifies if a file used to store data exists
@@ -113,7 +110,7 @@ abstract class Model
      */
     public function insert($file, $newData)
     {
-        if ($this->checkFile($file) && $this->validate->notEmpty($newData)) {
+        if ($this->checkFile($file)) {
 
             $data = json_decode(file_get_contents($this->getFilePath($file)), true);
 

@@ -12,6 +12,6 @@ use LightSpeed\Repositories\Contracts\ValidateDataInterface;
 
 return [
     //bind an interface to an implementation
-    
+    ValidateDataInterface::class => object(ValidateDataRepository::class)
 
 ];

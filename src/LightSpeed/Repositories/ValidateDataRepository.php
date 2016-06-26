@@ -16,6 +16,6 @@ class ValidateDataRepository implements ValidateDataInterface
 
     public function notEmpty($data)
     {
-        return isEmpty($data);
+        return empty($data);
     }
 }

@@ -6,13 +6,15 @@
  * Date: 25/06/16
  * Time: 02:52
  */
+use LightSpeed\Models\User;
+
 class UserTest extends \PHPUnit\Framework\TestCase
 {
     protected $user;
 
     protected function setUp()
     {
-        $this->user = new \LightSpeed\Models\User();
+        $this->user = new User();
     }
 
     public function testDeleteFile()

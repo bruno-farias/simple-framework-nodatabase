@@ -9,13 +9,21 @@
 namespace LightSpeed\Controllers;
 
 
+use \LightSpeed\Repositories\Contracts\ValidateDataInterface;
+
 class HomeController
 {
+
+    protected $validate;
+
+    public function __construct(ValidateDataInterface $validate)
+    {
+        $this->validate = $validate;
+    }
 
     public function index()
     {
         echo 'Hello index';
-        return false;
     }
 
 }

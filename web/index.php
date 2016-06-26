@@ -9,12 +9,17 @@
 use FastRoute\RouteCollector;
 
 $container = require __DIR__ . '/../app/bootstrap.php';
+$injector = new Auryn\Injector;
 
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', ['LightSpeed\Controllers\HomeController', 'index']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+
+$aliases = [
+    'LightSpeed\Repositories\Contracts\ValidateDataInterface' => 'LightSpeed\Repositories\ValidateDataRepository'
+];
 
 switch ($route[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
@@ -24,9 +29,16 @@ switch ($route[0]) {
         echo '405 Method not allowed';
         break;
     case FastRoute\Dispatcher::FOUND:
-        $controller = $route[1];
+        $controller = $route[1][0];
+        $action     = $route[1][1];
         $parameters = $route[2];
 
-        $container->call($controller, $parameters);
+        foreach ($aliases as $interface => $concrete) {
+            $injector->alias($interface, $concrete);
+        }
+
+        return $injector->execute([$injector->make($controller), $action], $parameters);
+
+        //$container->call($controller, $parameters);
         break;
 }
