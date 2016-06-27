@@ -116,7 +116,7 @@ abstract class Model
      */
     public function checkFile()
     {
-        return file_exists($this->getFilePath()) or die('File not exists!');
+        return (file_exists($this->getFilePath()))?file_exists($this->getFilePath()):die('File not exists!');
     }
 
     /**
@@ -141,7 +141,7 @@ abstract class Model
      */
     public function createFile()
     {
-        return fopen($this->getFilePath(), 'w') or die('Unable to create file ' . $this->file);
+        return (fopen($this->getFilePath(), 'w'))?fopen($this->getFilePath(), 'w'):die('Unable to create file ' . $this->file);
     }
 
 

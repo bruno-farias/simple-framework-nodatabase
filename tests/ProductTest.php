@@ -34,24 +34,34 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     public function testInsert()
     {
         $faker = Faker\Factory::create();
+
+        $types = ['red', 'white', 'organic'];
         $data = [];
 
         $items = [
             [
                 'product'   => 'Red Wine',
-                'price'     => 20.57
+                'price'     => 20.57,
+                'text'      => $faker->text(200),
+                'category'  => 'red'
             ],
             [
                 'product'   => 'Beer',
-                'price'     => 1.70
+                'price'     => 1.70,
+                'text'      => $faker->text(200),
+                'category'  => 'white'
             ],
             [
                 'product'   => 'Champagne',
-                'price'     => 10.20
+                'price'     => 10.20,
+                'text'      => $faker->text(200),
+                'category'  => 'organic'
             ],
             [
                 'product'   => 'Nutella',
-                'price'     => 10.20
+                'price'     => 10.20,
+                'text'      => $faker->text(200),
+                'category'  => 'red'
             ]
         ];
 
@@ -59,10 +69,12 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             $data[] = $item;
         }
 
-        for ($x = 1; $x < 100; $x++) {
+        for ($x = 1; $x < 25; $x++) {
             $item = [
                 'product'   => $faker->catchPhrase,
-                'price'     => $faker->randomFloat(2, 5, 300)
+                'price'     => $faker->randomFloat(2, 5, 300),
+                'text'      => $faker->text(200),
+                'category'  => $types[rand(0,2)]
             ];
             $data[] = $item;
         }
