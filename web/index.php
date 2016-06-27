@@ -5,7 +5,7 @@
  * Date: 24/06/16
  * Time: 21:02
  */
-
+header("Access-Control-Allow-Origin: *");
 use FastRoute\RouteCollector;
 
 $container = require __DIR__ . '/../app/bootstrap.php';
@@ -58,5 +58,4 @@ switch ($route[0]) {
         }
 
         return $injector->execute([$injector->make($controller), $action]);
-        break;
 }
