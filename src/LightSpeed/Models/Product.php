@@ -11,6 +11,5 @@ namespace LightSpeed\Models;
 
 class Product extends Model
 {
-    //todo: change to products when in "production"
-    protected $file = 'product_test';
+    protected $file = 'products';
 }

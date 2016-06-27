@@ -16,6 +16,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
     {
         $this->user = new User();
         $this->user->setBaseDir('.');
+        $this->user->setFile('users');
     }
 
     public function testDeleteFile()

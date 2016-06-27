@@ -18,7 +18,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     {
         $this->product = new Product();
         $this->product->setBaseDir('.');
-        $this->product->setFile('product_test');
+        $this->product->setFile('products');
     }
 
     public function testDeleteFile()
@@ -35,7 +35,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     {
         $faker = Faker\Factory::create();
 
-        $types = ['red', 'white', 'organic'];
+        $types = ['Red', 'White', 'Organic'];
         $data = [];
 
         $items = [
@@ -43,19 +43,19 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                 'product'   => 'Red Wine',
                 'price'     => 20.57,
                 'text'      => $faker->text(200),
-                'category'  => 'red'
+                'category'  => 'Red'
             ],
             [
                 'product'   => 'Beer',
                 'price'     => 1.70,
                 'text'      => $faker->text(200),
-                'category'  => 'white'
+                'category'  => 'White'
             ],
             [
                 'product'   => 'Champagne',
                 'price'     => 10.20,
                 'text'      => $faker->text(200),
-                'category'  => 'organic'
+                'category'  => 'Organic'
             ],
             [
                 'product'   => 'Nutella',

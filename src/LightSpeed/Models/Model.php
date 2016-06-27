@@ -116,7 +116,7 @@ abstract class Model
      */
     public function checkFile()
     {
-        return (file_exists($this->getFilePath()))?file_exists($this->getFilePath()):die('File not exists!');
+        return (file_exists($this->getFilePath()))?true:die('File not exists!');
     }
 
     /**
@@ -141,7 +141,7 @@ abstract class Model
      */
     public function createFile()
     {
-        return (fopen($this->getFilePath(), 'w'))?fopen($this->getFilePath(), 'w'):die('Unable to create file ' . $this->file);
+        return (fopen($this->getFilePath(), 'w'))?true:die('Unable to create file ' . $this->file);
     }
 
 
@@ -181,8 +181,14 @@ abstract class Model
             $data = json_decode(file_get_contents($this->getFilePath()), true);
 
             foreach ($newData as $item) {
-                $data[] = array_merge(['id' => $this->generateId()], $item);
-                $count++;
+                if (is_array($item)) {
+                    $data[] = array_merge(['id' => $this->generateId()], $item);
+                    $count++;
+                } else {
+                    $data[] = array_merge(['id' => $this->generateId()], $newData);
+                    $count++;
+                    break;
+                }
             }
 
             //Saves the new content and returns the quantity inserted
@@ -284,6 +290,7 @@ abstract class Model
         foreach ($query as $data) {
 
             if($data['id'] == $id){
+                unset($data['_method']);
                 $data[$field] = $value;
                 $res[] = $data;
                 $count++;

@@ -11,19 +11,20 @@ namespace LightSpeed\Repositories;
 
 use LightSpeed\Models\Product;
 use LightSpeed\Repositories\Contracts\ProductsInterface;
-use Respect\Validation\Validator as v;
 
 class ProductsRepository implements ProductsInterface
 {
 
     public function store($data)
     {
-        $rules = v::key('product', v::stringType()->length(5, 50));
-        print_r($rules->validate($data));
+        $product = new Product();
+        return $product->insert($data);
     }
 
     public function update($id, $data)
     {
+        if (!isset($id))
+            return json_encode('error');
         $count = 0;
 
         foreach ($data as $key => $value) {
@@ -47,6 +48,12 @@ class ProductsRepository implements ProductsInterface
     {
         $products = new Product();
         return $products->all();
+    }
+
+    public function search($category)
+    {
+        $products = new Product();
+        return $products->where('category', $category);
     }
 
     public function delete($id)
