@@ -27,6 +27,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('POST', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'update']);
     $r->addRoute('GET', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'show']);
     $r->addRoute('DELETE', '/products/{id}', ['LightSpeed\Controllers\ProductsController', 'delete']);
+
+    //Coupons
+    //never expose this on real world
+    $r->addRoute('GET', '/coupons', ['LightSpeed\Controllers\CouponsController', 'index']);
+    $r->addRoute('GET', '/coupons/search/{code}', ['LightSpeed\Controllers\CouponsController', 'search']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
@@ -38,6 +43,7 @@ $aliases = [
     'LightSpeed\Repositories\Contracts\ValidateDataInterface'   => 'LightSpeed\Repositories\ValidateDataRepository',
     'LightSpeed\Repositories\Contracts\ProductsInterface'       => 'LightSpeed\Repositories\ProductsRepository',
     'LightSpeed\Repositories\Contracts\CategoriesInterface'     => 'LightSpeed\Repositories\CategoriesRepository',
+    'LightSpeed\Repositories\Contracts\CouponsInterface'        => 'LightSpeed\Repositories\CouponsRepository',
 ];
 
 switch ($route[0]) {
