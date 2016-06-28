@@ -15,19 +15,44 @@ class CouponsController
 {
     protected $coupon;
 
+    /**
+     * Using for DI
+     * CouponsController constructor.
+     * @param CouponsInterface $coupon
+     */
     public function __construct(CouponsInterface $coupon)
     {
         $this->coupon = $coupon;
     }
 
+    /**
+     * Returns the list of all coupons available
+     * In real world scenario will be much better create a middleware to
+     * prevent this being accessed without permission
+     * @return mixed
+     */
     public function index()
     {
         return print_r($this->coupon->listAll());
     }
-    
+
+    /**
+     * Check if a code exists
+     * @param $code
+     * @return mixed
+     */
     public function search($code)
     {
         return print_r($this->coupon->search($code));
+    }
+
+    /**
+     * Increment count of coupon to mark as used once
+     * @param $code
+     */
+    public function incrementUse($code)
+    {
+        //todo
     }
 
 }

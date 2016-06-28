@@ -14,7 +14,7 @@ $injector = new Auryn\Injector;
 /**
  * Routes
  */
-$dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->addRoute('GET', '/', ['LightSpeed\Controllers\HomeController', 'index']);
 
     //Categories

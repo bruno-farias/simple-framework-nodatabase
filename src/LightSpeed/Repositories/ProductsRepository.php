@@ -23,12 +23,13 @@ class ProductsRepository implements ProductsInterface
 
     public function update($id, $data)
     {
-        if (!isset($id))
+        if (!isset($id)) {
             return json_encode('error');
+        }
         $count = 0;
 
         foreach ($data as $key => $value) {
-            if ($key != '_method'){
+            if ($key != '_method') {
                 $product = new Product();
                 $count = $product->updateField($id, $key, $value);
                 unset($product);

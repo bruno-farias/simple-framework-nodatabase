@@ -126,8 +126,9 @@ abstract class Model
      */
     public function getFilePath()
     {
-        if ($this->baseDir === null)
+        if ($this->baseDir === null) {
             return constant('BASE') . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
+        }
 
         return $this->baseDir.'/' . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
     }
@@ -192,8 +193,9 @@ abstract class Model
             }
 
             //Saves the new content and returns the quantity inserted
-            if(file_put_contents($this->getFilePath(), json_encode($data)) > 0)
+            if(file_put_contents($this->getFilePath(), json_encode($data)) > 0) {
                 return $count;
+            }
         }
         return false;
     }

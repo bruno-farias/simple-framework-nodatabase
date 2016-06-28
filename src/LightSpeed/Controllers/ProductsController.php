@@ -60,8 +60,9 @@ class ProductsController
     public function update($id)
     {
         $products = $_POST;
-        if (!isset($products['_method']) || $products['_method'] != 'PUT')
+        if (!isset($products['_method']) || $products['_method'] != 'PUT') {
             die('Method not allowed');
+        }
 
         return print_r(json_decode($this->product->update($id, $_POST)));
     }
