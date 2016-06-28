@@ -291,7 +291,7 @@ abstract class Model
 
         foreach ($query as $data) {
 
-            if($data['id'] == $id) {
+            if ($data['id'] == $id) {
                 unset($data['_method']);
                 $data[$field] = $value;
                 $res[] = $data;
