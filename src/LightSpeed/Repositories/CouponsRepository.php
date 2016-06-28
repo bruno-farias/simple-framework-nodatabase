@@ -24,6 +24,8 @@ class CouponsRepository implements CouponsInterface
     public function search($code)
     {
         $coupons = new Coupon();
-        return $coupons->where('code', $code);
+        $res = $coupons->where('code', $code);
+        $code = json_decode($res)[0];
+        return ($code->count <= $code->count_limit)?$res:json_encode('not_valid_anymore');
     }
 }
