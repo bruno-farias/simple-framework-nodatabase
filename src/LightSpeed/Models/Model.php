@@ -116,7 +116,7 @@ abstract class Model
      */
     public function checkFile()
     {
-        return (file_exists($this->getFilePath()))?true:die('File not exists!');
+        return (file_exists($this->getFilePath())) ? true : die('File not exists!');
     }
 
     /**
@@ -127,10 +127,10 @@ abstract class Model
     public function getFilePath()
     {
         if ($this->baseDir === null) {
-            return constant('BASE') . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
+            return constant('BASE') . $this->rootDirectory . '/' . $this->file . $this->fileExtension;
         }
 
-        return $this->baseDir.'/' . $this->rootDirectory .'/' . $this->file . $this->fileExtension;
+        return $this->baseDir . '/' . $this->rootDirectory . '/' . $this->file . $this->fileExtension;
     }
 
     /**
@@ -142,7 +142,7 @@ abstract class Model
      */
     public function createFile()
     {
-        return (fopen($this->getFilePath(), 'w'))?true:die('Unable to create file ' . $this->file);
+        return (fopen($this->getFilePath(), 'w')) ? true : die('Unable to create file ' . $this->file);
     }
 
 
@@ -193,7 +193,7 @@ abstract class Model
             }
 
             //Saves the new content and returns the quantity inserted
-            if(file_put_contents($this->getFilePath(), json_encode($data)) > 0) {
+            if (file_put_contents($this->getFilePath(), json_encode($data)) > 0) {
                 return $count;
             }
         }
@@ -263,7 +263,7 @@ abstract class Model
 
         foreach ($query as $data) {
 
-            if ($data->{$field} == $value){
+            if ($data->{$field} == $value) {
                 $data->{$field} = $newValue;
                 $count++;
             }
@@ -291,7 +291,7 @@ abstract class Model
 
         foreach ($query as $data) {
 
-            if($data['id'] == $id){
+            if($data['id'] == $id) {
                 unset($data['_method']);
                 $data[$field] = $value;
                 $res[] = $data;
@@ -321,7 +321,7 @@ abstract class Model
 
         foreach ($query as $data) {
 
-            if ($data[$field] == $value){
+            if ($data[$field] == $value) {
                 unset($data);
                 $count++;
                 continue;
