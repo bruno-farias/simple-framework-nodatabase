@@ -15,12 +15,23 @@ use LightSpeed\Repositories\Contracts\ProductsInterface;
 class ProductsRepository implements ProductsInterface
 {
 
+    /**
+     * Create a new product
+     * @param $data
+     * @return bool|int
+     */
     public function store($data)
     {
         $product = new Product();
         return $product->insert($data);
     }
 
+    /**
+     * Updates a given product
+     * @param $id
+     * @param $data
+     * @return mixed|string
+     */
     public function update($id, $data)
     {
         if (!isset($id)) {
@@ -39,24 +50,43 @@ class ProductsRepository implements ProductsInterface
         return json_decode($count);
     }
 
+    /**
+     * Return a single product by given id
+     * @param $id
+     * @return string
+     */
     public function show($id)
     {
         $product = new Product();
         return $product->where('id', $id);
     }
 
+    /**
+     * Return a list of all products
+     * @return string
+     */
     public function listsAll()
     {
         $products = new Product();
         return $products->all();
     }
 
+    /**
+     * Makes a search, filtering and returning only products that matches with query
+     * @param $category
+     * @return string
+     */
     public function search($category)
     {
         $products = new Product();
         return $products->where('category', $category);
     }
 
+    /**
+     * Delete a product
+     * @param $id
+     * @return string
+     */
     public function delete($id)
     {
         $products = new Product();

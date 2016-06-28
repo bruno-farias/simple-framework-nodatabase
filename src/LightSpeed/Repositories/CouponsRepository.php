@@ -15,12 +15,23 @@ use LightSpeed\Repositories\Contracts\CouponsInterface;
 class CouponsRepository implements CouponsInterface
 {
 
+    /**
+     * Return a list of all Coupons
+     * Never use this on real world :-)
+     * @return string
+     */
     public function listAll()
     {
         $coupons = new Coupon();
         return $coupons->all();
     }
 
+
+    /**
+     * Search a given coupon code
+     * @param $code
+     * @return string
+     */
     public function search($code)
     {
         $coupons = new Coupon();

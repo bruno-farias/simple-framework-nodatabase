@@ -37,6 +37,10 @@ class ProductsController
         print_r($this->product->listsAll());
     }
 
+    /**
+     * Returns Products in a given Category
+     * @param $category
+     */
     public function category($category)
     {
         print_r($this->product->search($category));
@@ -48,7 +52,7 @@ class ProductsController
      */
     public function store()
     {
-        $products = $_POST;
+        $products = $_POST;//in real world this need to be sanitized
         return print_r($this->product->store($products));
     }
 

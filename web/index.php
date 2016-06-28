@@ -6,6 +6,7 @@
  * Time: 21:02
  */
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 use FastRoute\RouteCollector;
 
 $container = require __DIR__ . '/../app/bootstrap.php';
@@ -32,6 +33,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     //never expose this on real world
     $r->addRoute('GET', '/coupons', ['LightSpeed\Controllers\CouponsController', 'index']);
     $r->addRoute('GET', '/coupons/search/{code}', ['LightSpeed\Controllers\CouponsController', 'search']);
+
+    $r->addRoute('GET', '/orders', ['LightSpeed\Controllers\OrdersController', 'index']);
+    $r->addRoute('POST', '/orders', ['LightSpeed\Controllers\OrdersController', 'store']);
 });
 
 $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
@@ -44,6 +48,7 @@ $aliases = [
     'LightSpeed\Repositories\Contracts\ProductsInterface'       => 'LightSpeed\Repositories\ProductsRepository',
     'LightSpeed\Repositories\Contracts\CategoriesInterface'     => 'LightSpeed\Repositories\CategoriesRepository',
     'LightSpeed\Repositories\Contracts\CouponsInterface'        => 'LightSpeed\Repositories\CouponsRepository',
+    'LightSpeed\Repositories\Contracts\OrdersInterface'         => 'LightSpeed\Repositories\OrdersRepository',
 ];
 
 switch ($route[0]) {
