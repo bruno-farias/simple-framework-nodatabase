@@ -44,7 +44,6 @@ $route = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI
  * Interfaces binding
  */
 $aliases = [
-    'LightSpeed\Repositories\Contracts\ValidateDataInterface'   => 'LightSpeed\Repositories\ValidateDataRepository',
     'LightSpeed\Repositories\Contracts\ProductsInterface'       => 'LightSpeed\Repositories\ProductsRepository',
     'LightSpeed\Repositories\Contracts\CategoriesInterface'     => 'LightSpeed\Repositories\CategoriesRepository',
     'LightSpeed\Repositories\Contracts\CouponsInterface'        => 'LightSpeed\Repositories\CouponsRepository',

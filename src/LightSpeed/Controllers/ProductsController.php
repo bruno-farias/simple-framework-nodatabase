@@ -52,7 +52,7 @@ class ProductsController
      */
     public function store()
     {
-        $products = $_POST;//in real world this need to be sanitized
+        $products = $_POST; //in real world this need to be sanitized
         return print_r($this->product->store($products));
     }
 

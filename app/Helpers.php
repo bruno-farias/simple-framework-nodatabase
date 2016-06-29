@@ -8,8 +8,7 @@
  */
 class Helpers
 {
-
-
+    
     public static function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
     {
         $str = '';

@@ -8,9 +8,6 @@
 
 namespace LightSpeed\Models;
 
-
-use LightSpeed\Repositories\Contracts\ValidateDataInterface;
-
 abstract class Model
 {
 
@@ -85,13 +82,6 @@ abstract class Model
      * @var string
      */
     protected $dateFormat;
-
-    /**
-     * Property to validate data
-     *
-     * @var ValidateDataInterface
-     */
-    protected $validate;
 
     /**
      * @return null

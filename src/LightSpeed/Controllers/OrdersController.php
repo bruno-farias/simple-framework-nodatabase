@@ -36,7 +36,7 @@ class OrdersController
      */
     public function store()
     {
-        $order = $_POST;//in real world this need to be sanitized
+        $order = $_POST; //in real world this need to be sanitized
         return print_r($this->order->store($order));
     }
 
