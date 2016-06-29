@@ -309,6 +309,10 @@ https://github.com/bruno-farias/lightspeed-front
 
 (make sure to ask me permission if you still don't have)
 
+# Coupons
+
+Just get the codes on coupons file
+
 # Considerations 
 
 I really expects that you guys like this as much as I enjoy to create this, so I can join your team!
