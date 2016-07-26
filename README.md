@@ -45,10 +45,10 @@ The shopping cart should have at least the following features:
 
 ### Installation
 
-- Just install using git on command line: git clone git@github.com:bruno-farias/lightspeed.git
-- After cloning the repository, go to folder lightspeed and run: composer install
-- To run the app, go to lightspeed/web and type into command line: php -S localhost:8080
-- Then access on your favorite browser (I hope that it's not the internet explorer) http://localhost:8080/
+- Just install using git on command line: git clone git@github.com:bruno-farias/simple-framework-nodatabase.git
+- After cloning the repository, go to folder simple-framework-nodatabase and run: composer install
+- To run the app, go to simple-framework-nodatabase/web and type into command line: php -S localhost:8080
+- Then access on your favorite browser http://localhost:8080/
 - That's all! :D
 
 
