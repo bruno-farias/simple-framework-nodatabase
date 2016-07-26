@@ -1,4 +1,6 @@
 # eCom Dev Assessment - Bruno Farias
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bruno-farias/simple-framework-nodatabase/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bruno-farias/simple-framework-nodatabase/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/bruno-farias/simple-framework-nodatabase/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bruno-farias/simple-framework-nodatabase/build-status/master)
 
 ## Subject:
 Create a shopping cart
