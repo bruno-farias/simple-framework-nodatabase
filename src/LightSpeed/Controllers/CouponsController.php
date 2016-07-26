@@ -46,13 +46,4 @@ class CouponsController
         return print_r($this->coupon->search($code));
     }
 
-    /**
-     * Increment count of coupon to mark as used once
-     * @param $code
-     */
-    public function incrementUse($code)
-    {
-        //todo
-    }
-
 }
